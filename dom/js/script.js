@@ -26,7 +26,8 @@ const movieDB = {
 const advPromo = document.querySelectorAll('.promo__adv img'),
       poster = document.querySelector('.promo__bg'),
       promoGenre = poster.querySelector('.promo__genre'),
-      movieList = document.querySelector('.promo__interactive-list');
+      movieList = document.querySelector('.promo__interactive-list'),
+      getFilm = document.querySelector('.adding__input');
 
 
 advPromo.forEach(item => {
@@ -47,3 +48,6 @@ movieDB.movies.forEach((film, i) => {
         </li>
     `;
 });
+
+console.log(getFilm.value);
+
