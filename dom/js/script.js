@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //генирируем список фильмов
     function createMovieList(films, parent) {
         parent.innerHTML = ''; //очистили родительский блок
-        sortArr(films); // отсортировали массив фильмов
+        sortArr(films); // отсортировали массив фильмов что бы после удаления была норм нумерация
 
         films.forEach((film, i) => {
             //создаем html структуру. К пустому род блоку добавляем html
@@ -81,12 +81,13 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         });
 
-        //удаление элементов (событие) 
+        //удаление элементов (событие). Выбрали div delete и перебрали кнопки
         document.querySelectorAll('.delete').forEach ((btn, i) => {
+            //вешаем событие на кнопку удаления
             btn.addEventListener('click', () => {
-                btn.parentElement.remove();
-                movieDB.movies.splice(i, 1);
-                createMovieList(films, parent);
+                btn.parentElement.remove(); //удаляем родительский элемент (если удалим кнопку, сам фильм останется на месте)
+                movieDB.movies.splice(i, 1); //удаляем i-фильм. 1 - один элемент
+                createMovieList(films, parent); // генерим список фильмо заново
             });
         });
     }
