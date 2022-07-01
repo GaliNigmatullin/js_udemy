@@ -25,56 +25,63 @@ document.addEventListener('DOMContentLoaded', () => {
           checkbox = addForm.querySelector('[type="checkbox"]');
 
     addForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        let newFilm = addInput.value;
-        const favorite = checkbox.checked;
+        event.preventDefault();  //отключачем стандартное поведение браузера
+        
+        let newFilm = addInput.value; //достаем введенное из инпута
+        const favorite = checkbox.checked; // проверка чекбокса на галочку
 
         if(newFilm){
 
             if (newFilm.length > 21) {
-                newFilm = `${newFilm.substring(0, 22)}...`;
+                newFilm = `${newFilm.substring(0, 22)}...`;  //обрезаем строку с 0 до 22(не включительно)
             }
 
             if(favorite){
-                console.log('Добавляем любимый филь');
+                console.log('Добавляем любимый фильм');   // сообщение если отмечен чекбокс
             }
 
-            movieDB.movies.push(newFilm);
-            sortArr(movieDB.movies);
-            createMovieList(movieDB.movies, movieList);
+            movieDB.movies.push(newFilm);  // добавили новый фильм в массив фильмов
+            sortArr(movieDB.movies);  // сортировка
+            createMovieList(movieDB.movies, movieList);  // пересобираем список фильмов
         }
 
-        addForm.reset();
+        addForm.reset(); // сбрасываем форму
     });      
     
+    // удаляем рекламные блоки
     const deleteAdv = (arr) => {
         arr.forEach(item => {
             item.remove();
         });
     };
    
+    //меняем жанр фильма и бэкграунд
     const makeChanges = () => {
-        promoGenre.textContent = 'Драма';
+        promoGenre.textContent = 'Драма'; // меняем жанр
     
-        poster.style.backgroundImage = 'url("img/bg.jpg")';
+        poster.style.backgroundImage = 'url("img/bg.jpg")'; // меняем бэк
     };
-        
+    
+    //сортировка массива фильмов
     const sortArr = (arr) => {
         arr.sort();
     };
 
+    //генирируем список фильмов
     function createMovieList(films, parent) {
-        parent.innerHTML = '';
-        sortArr(films);
+        parent.innerHTML = ''; //очистили родительский блок
+        sortArr(films); // отсортировали массив фильмов
 
         films.forEach((film, i) => {
+            //создаем html структуру. К пустому род блоку добавляем html
             parent.innerHTML += `
                 <li class="promo__interactive-item">${i+1}. ${film}
                     <div class="delete"></div>
                 </li>
             `;
         });
+
+        //удаление элементов (событие) 
         document.querySelectorAll('.delete').forEach ((btn, i) => {
             btn.addEventListener('click', () => {
                 btn.parentElement.remove();
