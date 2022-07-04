@@ -10,7 +10,7 @@
 
 // touches кол-во пальцев сейчас на экране
 // targetTouches - непосредственно с элементом
-
+// changedTouches - кол -во пальцев, которые участвуют в текущем событии
 
 
 window.addEventListener('DOMContentLoaded', () => {
